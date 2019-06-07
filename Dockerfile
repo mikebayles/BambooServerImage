@@ -22,6 +22,8 @@ RUN apt-get install -y maven
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
+RUN curl -sSL https://sdk.cloud.google.com | bash
+RUN gcloud components update --quiet
 
 RUN addgroup ${BAMBOO_GROUP} && \
      adduser ${BAMBOO_USER} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --home ${BAMBOO_USER_HOME} --ingroup ${BAMBOO_GROUP} --disabled-password
@@ -38,6 +40,7 @@ RUN chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_SERVER_INSTALL_DIR}"
 RUN chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_SERVER_HOME}"
 
 COPY entrypoint.sh              /entrypoint.sh
+
 RUN chown ${BAMBOO_USER}:${BAMBOO_GROUP} /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 #create symlink to automate capability detection
