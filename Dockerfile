@@ -22,7 +22,7 @@ RUN apt-get install -y maven
 
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
-RUN curl -sSL https://sdk.cloud.google.com | bash
+RUN curl -sSL https://sdk.cloud.google.com | bash -
 RUN gcloud components update --quiet
 
 RUN addgroup ${BAMBOO_GROUP} && \
